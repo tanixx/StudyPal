@@ -1,0 +1,130 @@
+# this is an auto generated file. This will be overwritten
+
+subscription OnCreateSubject(
+  $filter: ModelSubscriptionSubjectFilterInput
+  $owner: String
+) {
+  onCreateSubject(filter: $filter, owner: $owner) {
+    id
+    name
+    owner
+    topics {
+      nextToken
+      startedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+subscription OnUpdateSubject(
+  $filter: ModelSubscriptionSubjectFilterInput
+  $owner: String
+) {
+  onUpdateSubject(filter: $filter, owner: $owner) {
+    id
+    name
+    owner
+    topics {
+      nextToken
+      startedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+subscription OnDeleteSubject(
+  $filter: ModelSubscriptionSubjectFilterInput
+  $owner: String
+) {
+  onDeleteSubject(filter: $filter, owner: $owner) {
+    id
+    name
+    owner
+    topics {
+      nextToken
+      startedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+subscription OnCreateTopic(
+  $filter: ModelSubscriptionTopicFilterInput
+  $owner: String
+) {
+  onCreateTopic(filter: $filter, owner: $owner) {
+    id
+    subjectID
+    topicName
+    deadline
+    progress
+    importance
+    owner
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+subscription OnUpdateTopic(
+  $filter: ModelSubscriptionTopicFilterInput
+  $owner: String
+) {
+  onUpdateTopic(filter: $filter, owner: $owner) {
+    id
+    subjectID
+    topicName
+    deadline
+    progress
+    importance
+    owner
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+subscription OnDeleteTopic(
+  $filter: ModelSubscriptionTopicFilterInput
+  $owner: String
+) {
+  onDeleteTopic(filter: $filter, owner: $owner) {
+    id
+    subjectID
+    topicName
+    deadline
+    progress
+    importance
+    owner
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}

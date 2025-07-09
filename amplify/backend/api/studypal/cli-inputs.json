@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "studypal",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authstudypal0804ae86"
+    },
+    "conflictResolution": {
+      "defaultResolutionStrategy": {
+        "type": "AUTOMERGE"
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "version": "1",
+  "cognitoConfig": {
+    "identityPoolName": "studypal0804ae86_identitypool_0804ae86",
+    "allowUnauthenticatedIdentities": false,
+    "resourceNameTruncated": "studyp0804ae86",
+    "userPoolName": "studypal0804ae86_userpool_0804ae86",
+    "autoVerifiedAttributes": [
+      "email"
+    ],
+    "mfaConfiguration": "OFF",
+    "mfaTypes": [
+      "SMS Text Message"
+    ],
+    "smsAuthenticationMessage": "Your authentication code is {####}",
+    "smsVerificationMessage": "Your verification code is {####}",
+    "emailVerificationSubject": "Your verification code",
+    "emailVerificationMessage": "Your verification code is {####}",
+    "defaultPasswordPolicy": false,
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [],
+    "requiredAttributes": [
+      "email"
+    ],
+    "aliasAttributes": [],
+    "userpoolClientGenerateSecret": false,
+    "userpoolClientRefreshTokenValidity": 30,
+    "userpoolClientWriteAttributes": [
+      "email"
+    ],
+    "userpoolClientReadAttributes": [
+      "email"
+    ],
+    "userpoolClientLambdaRole": "studyp0804ae86_userpoolclient_lambda_role",
+    "userpoolClientSetAttributes": false,
+    "sharedId": "0804ae86",
+    "resourceName": "studypal0804ae86",
+    "authSelections": "identityPoolAndUserPool",
+    "useDefault": "defaultSocial",
+    "hostedUI": true,
+    "usernameAttributes": [
+      "email"
+    ],
+    "hostedUIDomainName": "studypal0804ae86-0804ae86",
+    "authProvidersUserPool": [
+      "Google"
+    ],
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
+    "userPoolGroupList": [],
+    "serviceName": "Cognito",
+    "usernameCaseSensitive": false,
+    "useEnabledMfas": true,
+    "authRoleArn": {
+      "Fn::GetAtt": [
+        "AuthRole",
+        "Arn"
+      ]
+    },
+    "unauthRoleArn": {
+      "Fn::GetAtt": [
+        "UnauthRole",
+        "Arn"
+      ]
+    },
+    "breakCircularDependency": true,
+    "dependsOn": [],
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://my-redirect-bucket-studypal.s3.ap-south-1.amazonaws.com/redirect.html/\"],\"LogoutURLs\":[\"https://my-redirect-bucket-studypal.s3.ap-south-1.amazonaws.com/redirect.html/\"]}"
+  }
+}

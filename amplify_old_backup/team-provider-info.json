@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-studypal-dev-cd5db-authRole",
+      "UnauthRoleArn": "arn:aws:iam::727889419847:role/amplify-studypal-dev-cd5db-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::727889419847:role/amplify-studypal-dev-cd5db-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-studypal-dev-cd5db-deployment",
+      "UnauthRoleName": "amplify-studypal-dev-cd5db-unauthRole",
+      "StackName": "amplify-studypal-dev-cd5db",
+      "StackId": "arn:aws:cloudformation:us-east-1:727889419847:stack/amplify-studypal-dev-cd5db/c5e69a40-41d1-11f0-adfe-0ea7c795c7a5",
+      "AmplifyAppId": "d35etp4t922v2r"
+    },
+    "categories": {
+      "auth": {
+        "studypalUserPool": {}
+      },
+      "api": {
+        "studypal": {}
+      }
+    }
+  }
+}

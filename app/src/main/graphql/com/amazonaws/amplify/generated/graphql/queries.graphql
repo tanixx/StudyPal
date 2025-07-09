@@ -1,0 +1,201 @@
+# this is an auto generated file. This will be overwritten
+
+query GetSubject($id: ID!) {
+  getSubject(id: $id) {
+    id
+    name
+    owner
+    topics {
+      nextToken
+      startedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+query ListSubjects(
+  $id: ID
+  $filter: ModelSubjectFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listSubjects(
+    id: $id
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      name
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+    nextToken
+    startedAt
+    __typename
+  }
+}
+
+query SyncSubjects(
+  $filter: ModelSubjectFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncSubjects(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+    nextToken
+    startedAt
+    __typename
+  }
+}
+
+query GetTopic($id: ID!) {
+  getTopic(id: $id) {
+    id
+    subjectID
+    topicName
+    deadline
+    progress
+    importance
+    owner
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+query ListTopics(
+  $id: ID
+  $filter: ModelTopicFilterInput
+  $limit: Int
+  $nextToken: String
+  $sortDirection: ModelSortDirection
+) {
+  listTopics(
+    id: $id
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    sortDirection: $sortDirection
+  ) {
+    items {
+      id
+      subjectID
+      topicName
+      deadline
+      progress
+      importance
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+    nextToken
+    startedAt
+    __typename
+  }
+}
+
+query SyncTopics(
+  $filter: ModelTopicFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncTopics(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      subjectID
+      topicName
+      deadline
+      progress
+      importance
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+    nextToken
+    startedAt
+    __typename
+  }
+}
+
+query TopicsBySubject(
+  $subjectID: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelTopicFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  topicsBySubject(
+    subjectID: $subjectID
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      subjectID
+      topicName
+      deadline
+      progress
+      importance
+      owner
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      __typename
+    }
+    nextToken
+    startedAt
+    __typename
+  }
+}

@@ -1,0 +1,23 @@
+type Subject
+@model
+@auth(rules: [{ allow: owner ,ownerField: "owner"}])
+{
+  id: ID! @primaryKey
+  name: String!
+  owner: String!
+  topics: [Topic] @hasMany(indexName: "bySubject", fields: ["id"])
+}
+
+type Topic
+@model
+@auth(rules: [{ allow: owner ,ownerField:"owner"}])
+{
+  id: ID! @primaryKey
+  subjectID: ID! @index(name: "bySubject", queryField: "topicsBySubject")
+#  subject: Subject @belongsTo(fields: ["subjectID"])
+  topicName: String!
+  deadline: String
+  progress: String
+  importance: String
+  owner: String!
+}

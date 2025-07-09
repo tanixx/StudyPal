@@ -1,0 +1,21 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme using Material 3 -->
+    <style name="Theme.StudyPal" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your Material3 theme here -->
+        <item name="colorPrimary">#BC6C25</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#DDA15E</item>
+        <item name="colorSurface">#FEFAE0</item>
+        <item name="android:statusBarColor">#BC6C25</item>
+        <item name="android:navigationBarColor">#FEFAE0</item>
+    </style>
+
+    <!-- Splash Screen Theme -->
+    <style name="Theme.StudyPal.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="postSplashScreenTheme">@style/Theme.StudyPal</item>
+    </style>
+
+</resources>

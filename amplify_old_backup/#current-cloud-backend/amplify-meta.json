@@ -1,0 +1,87 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-studypal-dev-cd5db-authRole",
+      "UnauthRoleArn": "arn:aws:iam::727889419847:role/amplify-studypal-dev-cd5db-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::727889419847:role/amplify-studypal-dev-cd5db-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-studypal-dev-cd5db-deployment",
+      "UnauthRoleName": "amplify-studypal-dev-cd5db-unauthRole",
+      "StackName": "amplify-studypal-dev-cd5db",
+      "StackId": "arn:aws:cloudformation:us-east-1:727889419847:stack/amplify-studypal-dev-cd5db/c5e69a40-41d1-11f0-adfe-0ea7c795c7a5",
+      "AmplifyAppId": "d35etp4t922v2r"
+    }
+  },
+  "auth": {
+    "studypalUserPool": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "lastPushTimeStamp": "2025-06-05T07:14:46.454Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-studypal-dev-cd5db-deployment/amplify-cfn-templates/auth/studypalUserPool-cloudformation-template.json",
+        "logicalId": "authstudypalUserPool"
+      },
+      "output": {
+        "UserPoolId": "us-east-1_Y22SiZ5Dq",
+        "AppClientIDWeb": "2p4caqnl71n45cetdqqudso81i",
+        "AppClientID": "4dcjite3h2kkvgn8a3fs8mnsj2",
+        "HostedUIDomain": "studypal-auth-dev",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:727889419847:userpool/us-east-1_Y22SiZ5Dq",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://example.com/callback/\"],\"LogoutURLs\":[\"https://example.com/signout/\"]}",
+        "UserPoolName": "studypalUserPool"
+      },
+      "lastPushDirHash": "9qdicYjv+qRw8lEfN3s550aRsS4="
+    }
+  },
+  "api": {
+    "studypal": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7
+            }
+          },
+          "additionalAuthenticationProviders": []
+        },
+        "GraphQLAPIIdOutput": "k3whz6wdqfhuvgbuudrg5muhj4",
+        "GraphQLAPIEndpointOutput": "https://k3u6xewhg5ew5p6auf5m7jbliy.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-ee3gwrzk65bgxeqdgcmbidze3i"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-studypal-dev-cd5db-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apistudypal"
+      },
+      "lastPushTimeStamp": "2025-06-05T07:14:46.454Z",
+      "lastPushDirHash": "QTIDJ9vRjS6FeXBM9SkOS2/FaPY="
+    }
+  }
+}

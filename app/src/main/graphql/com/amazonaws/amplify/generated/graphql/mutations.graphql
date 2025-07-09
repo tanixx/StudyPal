@@ -1,0 +1,130 @@
+# this is an auto generated file. This will be overwritten
+
+mutation CreateSubject(
+  $input: CreateSubjectInput!
+  $condition: ModelSubjectConditionInput
+) {
+  createSubject(input: $input, condition: $condition) {
+    id
+    name
+    owner
+    topics {
+      nextToken
+      startedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+mutation UpdateSubject(
+  $input: UpdateSubjectInput!
+  $condition: ModelSubjectConditionInput
+) {
+  updateSubject(input: $input, condition: $condition) {
+    id
+    name
+    owner
+    topics {
+      nextToken
+      startedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+mutation DeleteSubject(
+  $input: DeleteSubjectInput!
+  $condition: ModelSubjectConditionInput
+) {
+  deleteSubject(input: $input, condition: $condition) {
+    id
+    name
+    owner
+    topics {
+      nextToken
+      startedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+mutation CreateTopic(
+  $input: CreateTopicInput!
+  $condition: ModelTopicConditionInput
+) {
+  createTopic(input: $input, condition: $condition) {
+    id
+    subjectID
+    topicName
+    deadline
+    progress
+    importance
+    owner
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+mutation UpdateTopic(
+  $input: UpdateTopicInput!
+  $condition: ModelTopicConditionInput
+) {
+  updateTopic(input: $input, condition: $condition) {
+    id
+    subjectID
+    topicName
+    deadline
+    progress
+    importance
+    owner
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
+
+mutation DeleteTopic(
+  $input: DeleteTopicInput!
+  $condition: ModelTopicConditionInput
+) {
+  deleteTopic(input: $input, condition: $condition) {
+    id
+    subjectID
+    topicName
+    deadline
+    progress
+    importance
+    owner
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    __typename
+  }
+}
