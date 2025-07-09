@@ -2,10 +2,13 @@ package com.example.studypal;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +18,8 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
 import com.amplifyframework.AmplifyException;
+import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult;
+import com.amplifyframework.auth.options.AuthSignOutOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.api.aws.AWSApiPlugin;
@@ -45,6 +50,33 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(toolbar);
+
+        toolbar.setOnMenuItemClickListener(item -> {
+            if(item.getItemId() == R.id.menu_logout) {
+                AuthSignOutOptions options = AuthSignOutOptions.builder()
+                        .globalSignOut(true)
+                        .build();
+
+                Amplify.Auth.signOut(options, signOutResult -> {
+                    runOnUiThread(() -> {
+                        if (signOutResult instanceof AWSCognitoAuthSignOutResult.CompleteSignOut) {
+                            Toast.makeText(MainActivity.this, "Sign out successful", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            finish(); // Close MainActivity
+                        } else if (signOutResult instanceof AWSCognitoAuthSignOutResult.PartialSignOut) {
+                            Toast.makeText(MainActivity.this, "Partial sign out", Toast.LENGTH_SHORT).show();
+                        } else if (signOutResult instanceof AWSCognitoAuthSignOutResult.FailedSignOut) {
+                            Toast.makeText(MainActivity.this, "Sign out failed", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                });
+
+            }
+            if(item.getItemId()==R.id.menu_deadlines){
+                startActivity(new Intent(MainActivity.this, Deadline.class));
+            }
+            return true;
+        });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
