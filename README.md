@@ -24,7 +24,7 @@
 | Cloud Services     | AWS Amplify, Cognito, DynamoDB, AppSync, DataStore                           |
 | AI Integration     | Gemini API (Generative AI by Google)                                         |
 | Android Services   | AlarmManager, BroadcastReceiver                                              |
-| Tools              | Android Studio, Git, Postman                                                 |
+| Tools              | Android Studio, Git                                                          |
 
 ---
 
