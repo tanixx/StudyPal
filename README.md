@@ -33,10 +33,7 @@
 **Version:** `v1.0.0-beta`  
 **Status:** Internal testing  
 - APK distributed privately for feedback and testing  
-- Tested across various Android versions and screen sizes  
-- Fully production-ready and compliant with Play Store requirements  
-- Public release on Google Play Store planned
-
+[Download APK](https://github.com/tanixx/StudyPal/releases/download/v1.0/StudyPal.apk)
 ---
 
 ## Screenshots
