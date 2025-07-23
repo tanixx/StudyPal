@@ -2,15 +2,21 @@ package com.example.studypal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.amplifyframework.auth.AuthCategoryBehavior;
+import com.amplifyframework.core.Amplify;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.amplifyframework.auth.AuthProvider;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.hub.HubChannel;
 import com.android.volley.Request;
@@ -38,9 +44,10 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail, etPassword;
     private Button btnLogin, btnGoogleLogin;
     private TextView tvRegister;
+    private TextView tvForgotPassword;
 
-    private GoogleSignInClient googleSignInClient;
-    private static boolean isAmplifyConfigured = false;
+
+    private static final boolean isAmplifyConfigured = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,26 +62,9 @@ public class LoginActivity extends AppCompatActivity {
 
                     String fcmToken = task.getResult();
                     Log.d("FCM", "Token: " + fcmToken);
-
-                    // Send this token to your backend along with user ID
                     sendTokenToServer(fcmToken);
                 });
 
-//        if (!isAmplifyConfigured) {
-//            try {
-//                Amplify.addPlugin(new AWSCognitoAuthPlugin());
-//                Amplify.addPlugin(new AWSDataStorePlugin());
-//                Amplify.configure(getApplicationContext());
-//                Amplify.addPlugin(new AWSApiPlugin());
-//                Amplify.configure(getApplicationContext());
-//                isAmplifyConfigured = true;
-//// If using API
-//
-//                Log.i("MyAmplifyApp", "Initialized Amplify");
-//            } catch (AmplifyException e) {
-//                Log.e("MyAmplifyApp", "Could not initialize Amplify", e);
-//            }
-//        }
         Amplify.Auth.getCurrentUser(
                 authUser -> {
                     // User is signed in
@@ -131,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         btnGoogleLogin = findViewById(R.id.btnGoogleLogin);
         tvRegister = findViewById(R.id.tvRegister);
-
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
         btnLogin.setOnClickListener(v -> loginUser());
         btnGoogleLogin.setOnClickListener(v -> startGoogleSignIn());
 
@@ -141,13 +131,104 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         });
 
+        tvForgotPassword.setOnClickListener(v -> {
+            showForgotPasswordDialog();
+            });
+
+
         // Google Sign-In setup
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("552553940909-183ih06gqd8ajaktodreulqpc850k4hm.apps.googleusercontent.com") // Replace with your real Web client ID
+                .requestIdToken("552553940909-183ih06gqd8ajaktodreulqpc850k4hm.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
-        googleSignInClient = GoogleSignIn.getClient(this, gso);
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(this, gso);
     }
+
+
+    private void showForgotPasswordDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Reset Password");
+
+        final EditText input = new EditText(this);
+        input.setHint("Enter your registered email");
+        input.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        builder.setView(input);
+
+        builder.setPositiveButton("Send Code", (dialog, which) -> {
+            String email = input.getText().toString().trim();
+            if (!email.isEmpty()) {
+                initiateForgotPassword(email);
+            } else {
+                Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.show();
+    }
+
+    private void initiateForgotPassword(String email) {
+        Amplify.Auth.resetPassword(
+                email,
+                result -> {
+                    if (!result.isPasswordReset()) {
+                        runOnUiThread(() -> {
+                            Toast.makeText(this, "Verification code sent to your email.", Toast.LENGTH_LONG).show();
+                            showConfirmResetDialog(email);  // Pass email to next step
+                        });
+                    }
+                },
+                error -> runOnUiThread(() ->
+                        Toast.makeText(this, "Failed: " + error.getMessage(), Toast.LENGTH_LONG).show()
+                )
+        );
+    }
+
+    private void showConfirmResetDialog(String email) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Enter OTP and New Password");
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        final EditText inputCode = new EditText(this);
+        inputCode.setHint("Enter OTP");
+        inputCode.setInputType(InputType.TYPE_CLASS_NUMBER);
+        layout.addView(inputCode);
+
+        final EditText inputPassword = new EditText(this);
+        inputPassword.setHint("New Password");
+        inputPassword.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        layout.addView(inputPassword);
+
+        builder.setView(layout);
+
+        builder.setPositiveButton("Reset Password", (dialog, which) -> {
+            String code = inputCode.getText().toString().trim();
+            String newPassword = inputPassword.getText().toString().trim();
+            confirmResetPassword(email, newPassword, code);  // Pass email (username)
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+
+        builder.show();
+    }
+
+    private void confirmResetPassword(String email, String newPassword, String code) {
+        Amplify.Auth.confirmResetPassword(
+                email,
+                newPassword,
+                code,
+                () -> runOnUiThread(() -> {
+                    Toast.makeText(this, "Password reset successful!", Toast.LENGTH_LONG).show();
+                }),
+                error -> runOnUiThread(() -> {
+                    Toast.makeText(this, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+                })
+        );
+    }
+
 
     private void loginUser() {
         String email = etEmail.getText().toString().trim();
@@ -203,9 +284,24 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startGoogleSignIn() {
-        Intent signInIntent = googleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_GOOGLE_SIGN_IN);
+        Amplify.Auth.signInWithSocialWebUI(
+                AuthProvider.google(),
+                this,
+                result -> {
+                    runOnUiThread(() -> {
+                        Toast.makeText(this, "Google sign-in successful!", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(this, MainActivity.class));
+                        finish();
+                    });
+                },
+                error -> {
+                    Log.e(TAG, "Google login failed", error);
+                    runOnUiThread(() ->
+                            Toast.makeText(this, "Google login failed: " + error.getMessage(), Toast.LENGTH_LONG).show());
+                }
+        );
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -30,7 +30,7 @@ public class NotificationWorker extends Worker {
     @SuppressLint("MissingPermission")
     private void showNotification(String title, String message) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), "reminder_channel")
-                .setSmallIcon(R.drawable.ic_launcher_foreground) // add your own icon
+                .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
